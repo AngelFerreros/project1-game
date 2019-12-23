@@ -10,55 +10,38 @@
     <link href="https://fonts.googleapis.com/css?family=Monoton&display=swap" rel="stylesheet">
     <title>Guess the Movie!</title>
   </head>
-
   <body>
 
     <div class ="container">
-
         <h1>Guess the Movie</h1>
-
-
 
         <div id = "starter">
         <input type="text" id="input" placeholder="Enter Username"/>
             <button type="button" id = "play" class="btn btn-primary">Play</button>
             <!-- Button trigger modal -->
-            <button type="button" id = "instruct" class="btn btn-primary" data-toggle="modal" data-target="#instruct"> How to Play </button>
+            <button type="button" id = "instruct" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> How to Play </button>
         </div>
-
-    <!-- Modal -->
-            <div class="modal fade" id="instruct" tabindex="-1" role="dialog" aria-labelledby="gameInstruction"  aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="gameInstruction">Instructions</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    1.blah blah blah
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Instructions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Test your movie knowledge! <br> Guess the movie title of the image being displayed. Every correct answer garners 1 point. <br> Click play to begin!
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
-       <!--  </div> -->
-    </div>  <!-- container closing -->
-
-
-
-        <!-- <div class="card" style="width: 40rem;">
-          <img src="https://cdn3.whatculture.com/images/2019/02/a386635853d7653b-600x338.jpg" class="card-img-top" alt="movie">
-
-          <div class="card- body">
-            <p class="card-text"> where the letters are populated</p>
           </div>
-        </div> -->
+        </div>
 
-
+    </div>  <!-- container closing -->
 
 
     <!-- Optional JavaScript -->

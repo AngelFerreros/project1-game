@@ -12,17 +12,21 @@ body{
     text-align: center;
 }
 
-.btn .btn-primary{
-
-}
-
 h1 {
     font-family: 'Monoton', cursive;
     color: #F6F500 !Important;
-    font-size: 100px;
+    font-size: 90px;
     color: #FFFF;
     text-align: center;
     margin: 20px auto;
+}
+
+.img-fluid{
+    display:block;
+    width: 500px;
+    height: 380px;
+    margin: 0 auto;
+    border: 5px solid #FFFFFF;
 }
 
 .hide{
