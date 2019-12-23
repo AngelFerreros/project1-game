@@ -1,0 +1,31 @@
+body{
+    background-image:url("img/cinema-screen.jpg");
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* fix sizing issue when window is smaller*/
+}
+
+#starter{
+    margin: 50px auto;
+    text-align: center;
+}
+
+.btn .btn-primary{
+
+}
+
+h1 {
+    font-family: 'Monoton', cursive;
+    color: #F6F500 !Important;
+    font-size: 100px;
+    color: #FFFF;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.hide{
+    display: none;
+}
+
