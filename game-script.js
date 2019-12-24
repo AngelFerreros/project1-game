@@ -9,28 +9,34 @@ var score = 0;
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var answer = []; //array for player answer
 var gameStart = false;
-
+var container = document.querySelector(".container"); // to append gamepg
 
 //function to display gamepg
-var displayGame = function(){
-    var container = document.querySelector(".container"); // to append gamepg
+var displayImg = function(){
     var img = document.createElement("img");
     img.classList.add("img-fluid");
     img.src = movieQns[0].img
     container.appendChild(img);
-debugger;
+};
+
+//create alphabet ul
+var letterBtn = function(){
     var buttons = document.createElement("div");
     var letters = document.createElement("ul");
+    letters.id = 'alphabet';
         for (var i = 0; i < alphabet.length; i++) {
         var list = document.createElement("li");
+        console.log(alphabet[i]);
         list.id = "letter";
-        list.innerHTML = alphabet[i]; //!alphabet not displaying!
+        //!alphabet not displaying!
+        list.innerHTML = alphabet[i];
         container.appendChild(buttons);
-        container.appendChild(letters);
+        buttons.appendChild(letters);
+        letters.appendChild(list);
         }
 };
 
-//function to hide main page and callback displayGame func
+//function to hide main page and callback displayImg func
 var startGame = function(event){
 //get input value(name) for use in msg
     var nameField = document.querySelector("#input");
@@ -44,7 +50,8 @@ var startGame = function(event){
     console.log("hide buttons");
 
 // call function to display gamepage
-    displayGame();
+    displayImg();
+    letterBtn();
     gameStart = true;
 };
 //add click event listener on play btn to start game
@@ -57,6 +64,11 @@ console.log(playGameBtn);
     //1st photo and empty blocks or line below it (accdg to number of letters in the movie title)
     //random letters below lines or alphabet
         //on click of any letter populate title array
+
+    // element.addEventListener("click", FUNCTION TO POPULATE ARRAY);
+
+
+
         //first letter push into first line
         //preceding letters push into end of array
         //click letters on array to remove that letter
@@ -67,15 +79,13 @@ console.log(playGameBtn);
         //score ++ (write function to increment score & update score board-appendChild)
         //move to next qstn
 
+        // function checkAnswer() {
 
-
-// function checkAnswer() {
-
-    //else,
-        //title array - apply class - red letters
-        //move to next qstn
-        //score --
-// }
+            //else,
+                //title array - apply class - red letters
+                //move to next qstn
+                //score --
+        // }
 
     //option to click "end" to close game
 //last pg
