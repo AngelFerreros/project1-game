@@ -6,17 +6,18 @@ console.log("js working");
 var playGameBtn = document.querySelector("#play");
 var container = document.querySelector(".container"); // to append gamepg
 var player; //store name for msg later
+var movieTitle = "";
 var score = 0;
 var level = 0; //level counter
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var guesses = []; //array to store player guess of letters
+var img = document.createElement("img");
 
 var gameStart = false;
 
 //function to display gamepg img
 var displayImg = function(){
     var imgHolder = document.getElementById("img");
-    var img = document.createElement("img");
     img.classList.add("img-fluid");
     img.src = movieLvl[0].img;
     imgHolder.appendChild(img);
@@ -29,9 +30,9 @@ var letterBtn = function(){
         for (var i = 0; i < alphabet.length; i++) {
         var list = document.createElement("li");
         console.log(alphabet[i]);
-        list.id = "letter";
+        list.id = alphabet[i];
         list.innerHTML = alphabet[i];
-
+        list.onclick = checkAnswer(alphabet[i]);
         alphabetBtn.appendChild(letters);
         letters.appendChild(list);
         }
@@ -40,7 +41,7 @@ var letterBtn = function(){
 var result = function(){
     // var wordHolder = document.createElement("div");
     var correctGuess = document.createElement("ul");
-    var movieTitle = movieLvl[level].title;
+    movieTitle = movieLvl[level].title;
     console.log(movieTitle.length);
     for (var j = 0; j < movieTitle.length; j++) {
       guess = document.createElement("li");
@@ -58,7 +59,9 @@ var result = function(){
 //onclick function for next level
 var handleNext = function (event) {
     if ((level+1)<= movieLvl.length-1){
-    level = level ++;
+    level = level+1;
+    movieTitle = movieLvl[level].title;
+    img.src = movieLvl[level].img;
     console.log(level);
     }
     else {
@@ -94,6 +97,17 @@ var startGame = function(event){
 playGameBtn.addEventListener("click",startGame);
 console.log(playGameBtn);
 
+
+function checkAnswer(alphabet[i]) {
+
+
+}
+
+        //     else,
+        //         title array - apply class - red letters
+        //         move to next qstn
+        //         score --
+        // }
 
 
 
