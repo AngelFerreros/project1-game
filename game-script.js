@@ -4,39 +4,69 @@ console.log("js working");
         //remove display of starter page and display the game page
 
 var playGameBtn = document.querySelector("#play");
+var container = document.querySelector(".container"); // to append gamepg
 var player; //store name for msg later
 var score = 0;
+var level = 0; //level counter
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var answer = []; //array for player answer
-var gameStart = false;
-var container = document.querySelector(".container"); // to append gamepg
+var guesses = []; //array to store player guess of letters
 
-//function to display gamepg
+var gameStart = false;
+
+//function to display gamepg img
 var displayImg = function(){
+    var imgHolder = document.getElementById("img");
     var img = document.createElement("img");
     img.classList.add("img-fluid");
-    img.src = movieQns[0].img
-    container.appendChild(img);
+    img.src = movieLvl[0].img;
+    imgHolder.appendChild(img);
 };
 
-//create alphabet ul
+//create alphabet btns
 var letterBtn = function(){
-    var buttons = document.createElement("div");
     var letters = document.createElement("ul");
-    letters.id = 'alphabet';
+    letters.id = "alphabet";
         for (var i = 0; i < alphabet.length; i++) {
         var list = document.createElement("li");
         console.log(alphabet[i]);
         list.id = "letter";
-        //!alphabet not displaying!
         list.innerHTML = alphabet[i];
-        container.appendChild(buttons);
-        buttons.appendChild(letters);
+
+        alphabetBtn.appendChild(letters);
         letters.appendChild(list);
         }
 };
+// Create guesses ul
+var result = function(){
+    // var wordHolder = document.createElement("div");
+    var correctGuess = document.createElement("ul");
+    var movieTitle = movieLvl[level].title;
+    console.log(movieTitle.length);
+    for (var j = 0; j < movieTitle.length; j++) {
+      guess = document.createElement("li");
+      guess.id = "letter "+ j;
+      console.log(guess.id);
+      guess.innerHTML = "_ ";
 
-//function to hide main page and callback displayImg func
+    guesses.push(guess);
+    wordHolder.appendChild(correctGuess);
+    correctGuess.appendChild(guess);
+    wordHolder.classList.add("guessArray");
+    }
+  }
+
+//onclick function for next level
+var handleNext = function (event) {
+    if ((level+1)<= movieLvl.length-1){
+    level = level ++;
+    console.log(level);
+    }
+    else {
+    alert ("Game over!")
+    }
+};
+
+//function to hide main page and callback other functions to display game board pg
 var startGame = function(event){
 //get input value(name) for use in msg
     var nameField = document.querySelector("#input");
@@ -52,11 +82,18 @@ var startGame = function(event){
 // call function to display gamepage
     displayImg();
     letterBtn();
+    result();
+
+//create class for next btn
+    var nextLvl = document.getElementById("next");
+    nextLvl.classList.add(".nextBtn");
+    nextLvl.innerHTML = "Next";
     gameStart = true;
 };
 //add click event listener on play btn to start game
 playGameBtn.addEventListener("click",startGame);
 console.log(playGameBtn);
+
 
 
 
@@ -94,8 +131,11 @@ console.log(playGameBtn);
     //re-start button
 
 //sample array for movie questions (object)
-var movieQns = [
-{ question: 1, title: "Fast and Furious", img:"https://cdn3.whatculture.com/images/2019/02/a386635853d7653b-600x338.jpg"},
-{question: 2, title: "Star Wars", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-18-e1522270497513.jpg?q=50&fit=crop&w=963&h=481&dpr=1.5"}
+var movieLvl = [
+{ level: 1, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg"},
+{level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5"},
+{level:3, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg"},
+{level:4, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg"},
+{level:5, title:"Speed", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/09ccfe9e-e428-4fda-a9bf-9e193f8e1c63.jpg"}
 ];
-console.log(movieQns[0].img);
+console.log(movieLvl[0].img);

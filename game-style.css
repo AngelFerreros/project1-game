@@ -29,18 +29,33 @@ h1 {
     border: 5px solid #FFFFFF;
 }
 
-#alphabet li {
-  float:left;
-  margin: 30px 10px 10px 0;
-  list-style:none;
-  width:35px;
-  height:30px;
-  color: #FFFFFF;
-  cursor:pointer;
-  border: solid 1px #FFFFFF;
-  text-align: center;
-  line-height: 2px;
+#alphabet li{
+    float:left;
+    list-style:none;
+    margin: 30px 10px 10px 0;
+    width:35px;
+    height:30px;
+    color: #FFFFFF;
+    cursor:pointer;
+    border: solid 1px #FFFFFF;
+    text-align: center;
 }
+
+.guessArray{
+    list-style:none; !Important
+    float:left;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 30px 10px 10px 0;
+}
+
+.nextBtn{
+    color: #FFFFFF;
+    margin: 0 15px;
+    /*float:right;
+    justify-content: flex-end;*/
+}
+
 
 .hide{
     display: none;
