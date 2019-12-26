@@ -3,14 +3,14 @@ console.log("js working");
     // if play button is clicked, get user name then go to game page and start game
         //remove display of starter page and display the game page
 
-var playGameBtn = document.querySelector("#play");
-var container = document.querySelector(".container"); // to append gamepg
 var player; //store name for msg later
-var movieTitle = "";
+var movieTitle = "";//to store movie title from array
 var score = 0;
 var level = 0; //level counter
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var guesses = []; //array to store player guess of letters
+var guesses = []; //array to store player guesses(letters)
+var playGameBtn = document.querySelector("#play");
+var container = document.querySelector(".container"); // to append gamepg
 var img = document.createElement("img");
 
 var gameStart = false;
@@ -32,26 +32,25 @@ var letterBtn = function(){
         console.log(alphabet[i]);
         list.id = alphabet[i];
         list.innerHTML = alphabet[i];
-        list.onclick = checkAnswer(alphabet[i]);
+        list.addEventListener("click",checkAnswer);
         alphabetBtn.appendChild(letters);
         letters.appendChild(list);
         }
 };
 // Create guesses ul
 var result = function(){
-    // var wordHolder = document.createElement("div");
-    var correctGuess = document.createElement("ul");
+    var guessHolder = document.createElement("ul");
     movieTitle = movieLvl[level].title;
     console.log(movieTitle.length);
     for (var j = 0; j < movieTitle.length; j++) {
       guess = document.createElement("li");
       guess.id = "letter "+ j;
-      console.log(guess.id);
+      console.log(guess);
       guess.innerHTML = "_ ";
 
     guesses.push(guess);
-    wordHolder.appendChild(correctGuess);
-    correctGuess.appendChild(guess);
+    wordHolder.appendChild(guessHolder);
+    guessHolder.appendChild(guess);
     wordHolder.classList.add("guessArray");
     }
   }
@@ -63,9 +62,10 @@ var handleNext = function (event) {
     movieTitle = movieLvl[level].title;
     img.src = movieLvl[level].img;
     console.log(level);
+    console.log(movieTitle);
     }
     else {
-    alert ("Game over!")
+    alert ("Game Over") // display page to show score and game over message
     }
 };
 
@@ -97,11 +97,23 @@ var startGame = function(event){
 playGameBtn.addEventListener("click",startGame);
 console.log(playGameBtn);
 
+//on click of letters,check if letterClicked is found in movieTitle.If yes, display
+function checkAnswer(alphabet) {
+    var letterClicked = event.target.id;
+    console.log(letterClicked);
+    //split movieTitle into array of letters
+    var title = movieTitle.split("");
+    console.log(title);
 
-function checkAnswer(alphabet[i]) {
-
-
-}
+        for (var a = 0; a < title.length ; a++) {
+        var correctLetter = title[a].toLowerCase();
+            if (letterClicked === correctLetter){
+            var position = "letter " + a;
+            console.log(position);
+            document.getElementById(position).innerHTML = correctLetter;
+            }
+        }
+};
 
         //     else,
         //         title array - apply class - red letters
