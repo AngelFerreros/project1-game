@@ -123,7 +123,7 @@ var handleNext = function (event) {
 debugger;
 // reset letters guessed
 var resetLetters = function(){
-    wordHolder.innerHTML="";
+    letterHolder = [];
     // var oldMovieTitle = titleArray;
     // var newMovieTitle = movieLvl[level].title;
     // console.log(oldMovieTitle);
