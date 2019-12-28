@@ -35,6 +35,7 @@ ul {
 
 #alphabet li{
     float:left;
+    clear: right;
     list-style:none;
     margin: 30px 10px 10px 0;
     width:35px;
@@ -45,21 +46,20 @@ ul {
     text-align: center;
 }
 
-.guessArray{
-    list-style:none;
-    float:left;
-    color: #FFFFFF;
-    text-align: center;
-    margin: 30px 10px 10px 0;
-}
-
 .nextBtn{
-    color: #FFFFFF;
+    color: #E6F400;
     margin: 0 15px;
     /*float:right;
     justify-content: flex-end;*/
 }
 
+#wordHolder{
+    color: #FFFFFF;
+    font-size: 45px;
+    margin: 15px 10px 10px 0px;
+    padding:5px;
+    text-align: center;
+}
 
 .hide{
     display: none;

@@ -1,25 +1,66 @@
 console.log("js working");
-//start page has instructions button and play button
-    // if play button is clicked, get user name then go to game page and start game
-        //remove display of starter page and display the game page
 
 var player; //store name for msg later
-var movieTitle = "";//to store movie title from array
+var titleArray = [];//to store movie title as array
 var score = 0;
 var level = 0; //level counter
+var letterHolder = []; //array to store blanks to fill
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var guesses = []; //array to store player guesses(letters)
 var playGameBtn = document.querySelector("#play");
 var container = document.querySelector(".container"); // to append gamepg
 var img = document.createElement("img");
+// var guessHolder = document.createElement("ul");
+
+// array for movie questions (object)
+var movieLvl = [
+{ level: 0, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg"},
+{level:1, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg"},
+{level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5"},
+{level:3, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg"},
+{level:4, title:"Speed", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/09ccfe9e-e428-4fda-a9bf-9e193f8e1c63.jpg"}
+];
+console.log(movieLvl[0].img);
 
 var gameStart = false;
 
+//start page has instructions button and play button
+    // if play button is clicked, get user name then go to game page and start game
+
+//function to hide main page and callback other functions to display game board pg
+var startGame = function(event){
+//get input value(name) for use in msg
+    var nameField = document.querySelector("#input");
+    var name = nameField.value;
+    console.log(name);
+    player = name;
+
+//hide main page elements - display:none
+    var starterField = document.getElementById("starter");
+    starterField.classList.add("hide");
+    console.log("hide buttons");
+
+//create class for next btn
+    var nextLvl = document.getElementById("next");
+    nextLvl.classList.add(".nextBtn");
+    nextLvl.innerHTML = "Next";
+    gameStart = true;
+
+//! FIX FUNCTIONS !
+// call function to display gamepage
+    displayImg();
+    letterBtn();
+    initialize();
+};
+//add click event listener on play btn to start game
+playGameBtn.addEventListener("click",startGame);
+console.log(playGameBtn);
+
+console.log(level);
 //function to display gamepg img
 var displayImg = function(){
-    var imgHolder = document.getElementById("img");
+    var imgHolder = document.getElementById("movie-img");
     img.classList.add("img-fluid");
-    img.src = movieLvl[0].img;
+    img.src = movieLvl[level].img;
     imgHolder.appendChild(img);
 };
 
@@ -37,131 +78,72 @@ var letterBtn = function(){
         letters.appendChild(list);
         }
 };
-// Create guesses ul
-var result = function(){
-    var guessHolder = document.createElement("ul");
-    movieTitle = movieLvl[level].title;
-    console.log(movieTitle.length);
-    for (var j = 0; j < movieTitle.length; j++) {
-      guess = document.createElement("li");
-      guess.id = "letter "+ j;
-      console.log(guess);
-      guess.innerHTML = "_ ";
 
-    guesses.push(guess);
-    wordHolder.appendChild(guessHolder);
-    guessHolder.appendChild(guess);
-    wordHolder.classList.add("guessArray");
+// Create function to load array for letters to be guessed
+var initialize = function(){
+    var movieTitle = movieLvl[level].title;
+    titleArray = movieTitle.split("");
+    console.log(titleArray.length);
+    var wordGuess;
+    for (var j = 0; j < titleArray.length; j++) {
+        letterHolder[j] = "_";
+        console.log(letterHolder);
     }
-  }
-
-//onclick function for next level
-var handleNext = function (event) {
-    if ((level+1)<= movieLvl.length-1){
-    level = level+1;
-    movieTitle = movieLvl[level].title;
-    img.src = movieLvl[level].img;
-    console.log(level);
-    console.log(movieTitle);
-    }
-    else {
-    alert ("Game Over") // display page to show score and game over message
-    }
+    wordGuess = letterHolder;
+    wordHolder.innerHTML = wordGuess;
 };
-
-//function to hide main page and callback other functions to display game board pg
-var startGame = function(event){
-//get input value(name) for use in msg
-    var nameField = document.querySelector("#input");
-    var name = nameField.value;
-    console.log(name);
-    player = name;
-
-//hide main page elements - display:none
-    var starterField = document.getElementById("starter");
-    starterField.classList.add("hide");
-    console.log("hide buttons");
-
-// call function to display gamepage
-    displayImg();
-    letterBtn();
-    result();
-
-//create class for next btn
-    var nextLvl = document.getElementById("next");
-    nextLvl.classList.add(".nextBtn");
-    nextLvl.innerHTML = "Next";
-    gameStart = true;
-};
-//add click event listener on play btn to start game
-playGameBtn.addEventListener("click",startGame);
-console.log(playGameBtn);
 
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display
-function checkAnswer(alphabet) {
+function checkAnswer(event) {
     var letterClicked = event.target.id;
     console.log(letterClicked);
-    //split movieTitle into array of letters
-    var title = movieTitle.split("");
-    console.log(title);
-
-        for (var a = 0; a < title.length ; a++) {
-        var correctLetter = title[a].toLowerCase();
+        for (var e = 0; e < titleArray.length ; e++) {
+        var correctLetter = titleArray[e].toLowerCase();
             if (letterClicked === correctLetter){
-            var position = "letter " + a;
+            var position = e;
             console.log(position);
-            document.getElementById(position).innerHTML = correctLetter;
+            letterHolder[e] = correctLetter;
+            wordGuess = letterHolder;
+            wordHolder.innerHTML = wordGuess;
             }
         }
 };
 
-        //     else,
-        //         title array - apply class - red letters
-        //         move to next qstn
-        //         score --
-        // }
+//onclick function for next level, remove previous guessHolder and append new guessHolder
+var handleNext = function (event) {
+    level += 1;
+    console.log(level);
+    img.src = movieLvl[level].img;
+    resetLetters();
+    // displayImg();
+    initialize();
+
+};
+
+debugger;
+// reset letters guessed
+var resetLetters = function(){
+    wordHolder.innerHTML="";
+    // var oldMovieTitle = titleArray;
+    // var newMovieTitle = movieLvl[level].title;
+    // console.log(oldMovieTitle);
+    // console.log(newMovieTitle);
+    // for (var d = 0; d < newMovieTitle.length; d++) {
+    //     letterHolder[d] = "_" ;
+    //     wordGuess = letterHolder;
+    // }
+    //     wordHolder.innerHTML = wordGuess;
+    //     console.log(letterToDelete);
+};
 
 
+//calculate score
+    // to display in score board and at end of game
+    //every correct movie guess = 1 point (?)
 
-    //back button - returns to previous page
-    //1st photo and empty blocks or line below it (accdg to number of letters in the movie title)
-    //random letters below lines or alphabet
-        //on click of any letter populate title array
-
-    // element.addEventListener("click", FUNCTION TO POPULATE ARRAY);
-
-
-
-        //first letter push into first line
-        //preceding letters push into end of array
-        //click letters on array to remove that letter
-
-
-    //check if correct
-        //compare title array with name array in object (write function)
-        //score ++ (write function to increment score & update score board-appendChild)
-        //move to next qstn
-
-        // function checkAnswer() {
-
-            //else,
-                //title array - apply class - red letters
-                //move to next qstn
-                //score --
-        // }
+//function to display end game msg
+    //last pg
+        //tally score plus msg
+            //msg depends on tiered score
 
     //option to click "end" to close game
-//last pg
-    //tally score plus msg
-        //msg depends on tiered score
-    //re-start button
-
-//sample array for movie questions (object)
-var movieLvl = [
-{ level: 1, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg"},
-{level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5"},
-{level:3, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg"},
-{level:4, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg"},
-{level:5, title:"Speed", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/09ccfe9e-e428-4fda-a9bf-9e193f8e1c63.jpg"}
-];
-console.log(movieLvl[0].img);
