@@ -3,6 +3,7 @@ console.log("js working");
 var player; //store name for msg later
 var titleArray = [];//to store movie title as array
 var score = 0;
+var maxWrongGuess = 5; // max number of wrong letters guessed. if more than 5, gmae over
 var level = 0; //level counter
 var letterHolder = []; //array to store blanks to fill
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
@@ -45,7 +46,11 @@ var startGame = function(event){
     nextLvl.innerHTML = "Next";
     gameStart = true;
 
-//! FIX FUNCTIONS !
+//display timer and start countdown
+    var displayTimer = document.getElementById("countdown-timer");
+    displayTimer.innerHTML = `Time remaining: ${counter} second(s)`
+    displayTimer.classList.add(".timerStyle");
+
 // call function to display gamepage
     displayImg();
     letterBtn();
@@ -84,15 +89,15 @@ var initialize = function(){
     var movieTitle = movieLvl[level].title;
     titleArray = movieTitle.split("");
     console.log(titleArray.length);
-    var wordGuess;
+    var wordGuess="";
     for (var j = 0; j < titleArray.length; j++) {
         letterHolder[j] = "_";
         console.log(letterHolder);
     }
-    wordGuess = letterHolder;
+    wordGuess = letterHolder.join(" ");
     wordHolder.innerHTML = wordGuess;
 };
-
+debugger;
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display
 function checkAnswer(event) {
     var letterClicked = event.target.id;
@@ -103,47 +108,53 @@ function checkAnswer(event) {
             var position = e;
             console.log(position);
             letterHolder[e] = correctLetter;
-            wordGuess = letterHolder;
+            wordGuess = letterHolder.join(" ");
             wordHolder.innerHTML = wordGuess;
             }
         }
 };
 
-//onclick function for next level, remove previous guessHolder and append new guessHolder
+//onclick function for next level, change image and re-initialize
 var handleNext = function (event) {
     level += 1;
     console.log(level);
     img.src = movieLvl[level].img;
     resetLetters();
-    // displayImg();
     initialize();
-
 };
 
-debugger;
 // reset letters guessed
 var resetLetters = function(){
     letterHolder = [];
-    // var oldMovieTitle = titleArray;
-    // var newMovieTitle = movieLvl[level].title;
-    // console.log(oldMovieTitle);
-    // console.log(newMovieTitle);
-    // for (var d = 0; d < newMovieTitle.length; d++) {
-    //     letterHolder[d] = "_" ;
-    //     wordGuess = letterHolder;
-    // }
-    //     wordHolder.innerHTML = wordGuess;
-    //     console.log(letterToDelete);
+
 };
 
+//countdown timer- 60sec for whole game
+var counter = 60;
+var timer = setInterval(updateTimer, 1000);
 
-//calculate score
-    // to display in score board and at end of game
-    //every correct movie guess = 1 point (?)
+var updateTimer = function(){
+  console.log(counter);
+  counter--
+    if (counter === 0) {
+    console.log("Game Over");
+    clearInterval(timer);
+    }
+};
+
+    // countdown once game starts
+    //every wrong letter guessed = +3 seconds
+    //once timer === 0 seconds, game over
+    //if player guessed all movies, display time remaining in end game msg
+
 
 //function to display end game msg
-    //last pg
-        //tally score plus msg
+    //in the last pg o when time runs out
+    // function gameOver() {
+        //tally score or display time taken plus msg
             //msg depends on tiered score
+            //if name = true {display name}
+            //else, use "stranger"
 
-    //option to click "end" to close game
+    //option to click "reset" whole game
+        //return to main page

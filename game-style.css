@@ -47,6 +47,7 @@ ul {
 }
 
 .nextBtn{
+    display: inline-block;
     color: #E6F400;
     margin: 0 15px;
     /*float:right;
@@ -59,6 +60,13 @@ ul {
     margin: 15px 10px 10px 0px;
     padding:5px;
     text-align: center;
+}
+
+.timerStyle{
+    border: 20px;
+    margin: 15px;
+    padding:5px;
+    color: #FF0C08;
 }
 
 .hide{
