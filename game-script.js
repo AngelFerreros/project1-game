@@ -10,8 +10,9 @@ var playGameBtn = document.querySelector("#play");
 var container = document.querySelector(".container"); // to append gamepg
 var img = document.createElement("img");
 var counter = 60;//countdown timer- 60sec for whole game
-
-// array for movie questions (object)
+var wordGuess= ""; //to store letterHolder as text and display in wordHolder div
+var wordGuessArray = []; //for handleNext verification
+// array for movie questions/level
 var movieLvl = [
 { level: 0, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg"},
 {level:1, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg"},
@@ -63,9 +64,8 @@ console.log(playGameBtn);
 
 // countdown once game starts
     //every wrong letter guessed = -3 seconds
-    //once timer === 0 seconds, game over
+    //once timer <= 0 seconds, game over
     //if player guessed all movies, display time remaining in end game msg
-// var timerId = setInterval("updateTimer()", 1000);
 
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
@@ -112,7 +112,7 @@ var initialize = function(){
     var movieTitle = movieLvl[level].title;
     titleArray = movieTitle.split("");
     console.log(titleArray.length);
-    var wordGuess="";
+    // var wordGuess="";
     for (var j = 0; j < titleArray.length; j++) {
         letterHolder[j] = "_";
         console.log(letterHolder);
@@ -140,31 +140,51 @@ function checkAnswer(event) {
         counter = counter - 3;
         console.log(counter);
         }
+  handleNext();
 };
 
-//onclick function for next level, change image and re-initialize
+
+debugger;
+
+//if letterHolder is empty or incomplete, call function to alert to make guesses
+//convert wordGuess string into array for comparison with letterHolder
 var handleNext = function (event) {
-    level += 1;
-    console.log(level);
-    img.src = movieLvl[level].img;
-    resetLetters();
-    initialize();
+wordGuessArray = wordGuess.split(" ");
+console.log(wordGuessArray);
+
+    if (letterHolder.includes(alphabet) === false && letterHolder != wordGuessArray){
+        var prompt = function (event) {
+            alert(`Cannot proceed to the next level`);
+        }
+        document.getElementById("next").addEventListener("click",prompt);
+    }
+    //else call levelUp, to move to the next level - change image and re-initialize
+    else {
+        document.getElementById("next").removeEventListener("click",prompt);
+        var levelUp = function (event) {
+            level += 1;
+            console.log(level);
+            img.src = movieLvl[level].img;
+            resetLetters();
+            initialize();
+        }
+        document.getElementById("next").addEventListener("click",levelUp);
+    }
 };
 
 // reset letters guessed
 var resetLetters = function(){
     letterHolder = [];
-
 };
 
 
 //function to display end game msg
-    //in the last pg o when time runs out
-    // function gameOver() {
-        //tally score or display time taken plus msg
-            //msg depends on tiered score
+// function gameOver() {
+    //if time runs out{remove }
+    //else (player answered all levels)
+        // display time taken plus msg
             //if name = true {display name}
             //else, use "stranger"
 
-    //option to click "reset" whole game
-        //return to main page
+    //option to click "reset/try again"
+        //return to main page to play again
