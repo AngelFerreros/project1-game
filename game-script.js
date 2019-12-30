@@ -3,14 +3,13 @@ console.log("js working");
 var player; //store name for msg later
 var titleArray = [];//to store movie title as array
 var score = 0;
-var maxWrongGuess = 5; // max number of wrong letters guessed. if more than 5, gmae over
 var level = 0; //level counter
 var letterHolder = []; //array to store blanks to fill
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var playGameBtn = document.querySelector("#play");
 var container = document.querySelector(".container"); // to append gamepg
 var img = document.createElement("img");
-var counter;//countdown timer- 60sec for whole game
+var counter = 60;//countdown timer- 60sec for whole game
 
 // array for movie questions (object)
 var movieLvl = [
@@ -50,11 +49,9 @@ var startGame = function(event){
     letterBtn();
     initialize();
 
-gameStart = true;
+    gameStart = true;
 
-counter = 60;
-timerId;
-// var timerId = setInterval("updateTimer()", 1000);
+    timerId = setInterval(updateTimer, 1000);
 
 };
 
@@ -68,7 +65,7 @@ console.log(playGameBtn);
     //every wrong letter guessed = -3 seconds
     //once timer === 0 seconds, game over
     //if player guessed all movies, display time remaining in end game msg
-var timerId = setInterval("updateTimer()", 1000);
+// var timerId = setInterval("updateTimer()", 1000);
 
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
@@ -79,12 +76,10 @@ var updateTimer = function() {
     counter--;
     console.log(counter);
     }
-//(counter === 0)
-    else  {
+    else if (counter <= 0) {
     console.log("Game Over");
     displayTimer.innerHTML = "Time's up"
     clearInterval(timerId);
-    //end game func
     }
 };
 
@@ -125,12 +120,12 @@ var initialize = function(){
     wordGuess = letterHolder.join(" ");
     wordHolder.innerHTML = wordGuess;
 };
-//debugger;
+debugger;
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display
 function checkAnswer(event) {
     var letterClicked = event.target.id;
     console.log(letterClicked);
-        for (var e = 0; e < titleArray.length ; e++) {
+    for (var e = 0; e < titleArray.length ; e++) {
         var correctLetter = titleArray[e].toLowerCase();
             if (letterClicked === correctLetter){
             var position = e;
@@ -139,9 +134,11 @@ function checkAnswer(event) {
             wordGuess = letterHolder.join(" ");
             wordHolder.innerHTML = wordGuess;
             }
-            else{
-                counter = counter -3;
-            }
+    }
+        if (titleArray.includes(letterClicked) === false) {
+        console.log(titleArray);
+        counter = counter - 3;
+        console.log(counter);
         }
 };
 
