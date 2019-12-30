@@ -10,7 +10,7 @@ var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
 var playGameBtn = document.querySelector("#play");
 var container = document.querySelector(".container"); // to append gamepg
 var img = document.createElement("img");
-// var guessHolder = document.createElement("ul");
+var counter;//countdown timer- 60sec for whole game
 
 // array for movie questions (object)
 var movieLvl = [
@@ -51,12 +51,42 @@ var startGame = function(event){
     initialize();
 
 gameStart = true;
-// call setInterval
+
+counter = 60;
+timerId;
+// var timerId = setInterval("updateTimer()", 1000);
 
 };
+
 //add click event listener on play btn to start game
 playGameBtn.addEventListener("click",startGame);
 console.log(playGameBtn);
+
+//debugger;
+
+// countdown once game starts
+    //every wrong letter guessed = -3 seconds
+    //once timer === 0 seconds, game over
+    //if player guessed all movies, display time remaining in end game msg
+var timerId = setInterval("updateTimer()", 1000);
+
+var updateTimer = function() {
+    var displayTimer = document.getElementById("countdown-timer");
+    displayTimer.classList.add(".timerStyle");
+
+    if ((counter <= 60) && (counter != 0)) {
+    displayTimer.innerHTML = `Time remaining: ${counter} second(s)`;
+    counter--;
+    console.log(counter);
+    }
+//(counter === 0)
+    else  {
+    console.log("Game Over");
+    displayTimer.innerHTML = "Time's up"
+    clearInterval(timerId);
+    //end game func
+    }
+};
 
 console.log(level);
 //function to display gamepg img
@@ -109,6 +139,9 @@ function checkAnswer(event) {
             wordGuess = letterHolder.join(" ");
             wordHolder.innerHTML = wordGuess;
             }
+            else{
+                counter = counter -3;
+            }
         }
 };
 
@@ -126,35 +159,6 @@ var resetLetters = function(){
     letterHolder = [];
 
 };
-
-debugger;
-//countdown timer- 60sec for whole game
-
-var counter = 60;
-var timer = setInterval(updateTimer, 1000);
-
-var updateTimer = function() {
-    var displayTimer = document.getElementById("countdown-timer");
-    displayTimer.classList.add(".timerStyle");
-
-    if ((counter <= 60) && (counter != 0)) {
-    displayTimer.innerHTML = `Time remaining: ${counter} second(s)`;
-    counter--;
-    console.log(counter);
-    }
-//(counter === 0)
-    else  {
-    console.log("Game Over");
-    clearInterval(timer);
-    //end game func
-    }
-};
-
-
-    // countdown once game starts
-    //every wrong letter guessed = +3 seconds
-    //once timer === 0 seconds, game over
-    //if player guessed all movies, display time remaining in end game msg
 
 
 //function to display end game msg
