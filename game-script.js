@@ -44,17 +44,15 @@ var startGame = function(event){
     var nextLvl = document.getElementById("next");
     nextLvl.classList.add(".nextBtn");
     nextLvl.innerHTML = "Next";
-    gameStart = true;
 
-//display timer and start countdown
-    var displayTimer = document.getElementById("countdown-timer");
-    displayTimer.innerHTML = `Time remaining: ${counter} second(s)`
-    displayTimer.classList.add(".timerStyle");
-
-// call function to display gamepage
+// call functions to play game
     displayImg();
     letterBtn();
     initialize();
+
+gameStart = true;
+// call setInterval
+
 };
 //add click event listener on play btn to start game
 playGameBtn.addEventListener("click",startGame);
@@ -97,7 +95,7 @@ var initialize = function(){
     wordGuess = letterHolder.join(" ");
     wordHolder.innerHTML = wordGuess;
 };
-debugger;
+//debugger;
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display
 function checkAnswer(event) {
     var letterClicked = event.target.id;
@@ -129,18 +127,29 @@ var resetLetters = function(){
 
 };
 
+debugger;
 //countdown timer- 60sec for whole game
+
 var counter = 60;
 var timer = setInterval(updateTimer, 1000);
 
-var updateTimer = function(){
-  console.log(counter);
-  counter--
-    if (counter === 0) {
+var updateTimer = function() {
+    var displayTimer = document.getElementById("countdown-timer");
+    displayTimer.classList.add(".timerStyle");
+
+    if ((counter <= 60) && (counter != 0)) {
+    displayTimer.innerHTML = `Time remaining: ${counter} second(s)`;
+    counter--;
+    console.log(counter);
+    }
+//(counter === 0)
+    else  {
     console.log("Game Over");
     clearInterval(timer);
+    //end game func
     }
 };
+
 
     // countdown once game starts
     //every wrong letter guessed = +3 seconds
