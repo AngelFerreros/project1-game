@@ -144,9 +144,9 @@ function checkAnswer(event) {
         }
 };
 
-//if letterHolder is empty or incomplete, call function to alert to make guesses
+//if letterHolder is empty or incomplete, alert to make guesses
 //convert wordGuess string into array for comparison with letterHolder
-//else call levelUp, to move to the next level - change image and re-initialize
+//else move to the next level - change image and re-initialize
 debugger;
 var handleNext = function (event) {
     if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false) ){
@@ -157,7 +157,7 @@ var handleNext = function (event) {
             initialize();
         }
     else {
-            alert(`Cannot proceed to the next level`);
+            alert(`Please make a guess!`);
         }
 };
 
