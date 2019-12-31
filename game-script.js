@@ -120,7 +120,7 @@ var initialize = function(){
     wordGuess = letterHolder.join(" ");
     wordHolder.innerHTML = wordGuess;
 };
-debugger;
+// debugger;
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display
 function checkAnswer(event) {
     var letterClicked = event.target.id;
@@ -134,42 +134,31 @@ function checkAnswer(event) {
             wordGuess = letterHolder.join(" ");
             wordHolder.innerHTML = wordGuess;
             }
+        wordGuessArray = letterHolder;
+        console.log(wordGuessArray);
     }
         if (titleArray.includes(letterClicked) === false) {
         console.log(titleArray);
         counter = counter - 3;
         console.log(counter);
         }
-  handleNext();
 };
-
-
-debugger;
 
 //if letterHolder is empty or incomplete, call function to alert to make guesses
 //convert wordGuess string into array for comparison with letterHolder
+//else call levelUp, to move to the next level - change image and re-initialize
+debugger;
 var handleNext = function (event) {
-wordGuessArray = wordGuess.split(" ");
-console.log(wordGuessArray);
-
-    if (letterHolder.includes(alphabet) === false && letterHolder != wordGuessArray){
-        var prompt = function (event) {
-            alert(`Cannot proceed to the next level`);
-        }
-        document.getElementById("next").addEventListener("click",prompt);
-    }
-    //else call levelUp, to move to the next level - change image and re-initialize
-    else {
-        document.getElementById("next").removeEventListener("click",prompt);
-        var levelUp = function (event) {
+    if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false) ){
             level += 1;
             console.log(level);
             img.src = movieLvl[level].img;
             resetLetters();
             initialize();
         }
-        document.getElementById("next").addEventListener("click",levelUp);
-    }
+    else {
+            alert(`Cannot proceed to the next level`);
+        }
 };
 
 // reset letters guessed
