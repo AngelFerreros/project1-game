@@ -58,18 +58,18 @@ console.log(playGameBtn);
 //debugger;
 
 // countdown once game starts
-//once timer <= 0 seconds, game over
+//once timer = 0 seconds, game over
 
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
     displayTimer.classList.add(".timerStyle");
 
     if ((counter <= 60) && (counter != 0)) {
-    displayTimer.innerHTML = `Time remaining: ${counter} second(s)`;
+    displayTimer.innerHTML = `Countdown timer: 00:${counter}`;
     counter--;
     console.log(counter);
     }
-    else if (counter <= 0) {
+    else if (counter === 0) {
     console.log("Game Over");
     displayTimer.innerHTML = "Time's up";
     clearInterval(timerId);
@@ -144,7 +144,7 @@ function checkAnswer(event) {
 //if letterHolder is empty or incomplete, alert to make guesses
 //convert wordGuess string into array for comparison with letterHolder
 //else move to the next level - change image and re-initialize
-debugger;
+// debugger;
 var handleNext = function (event) {
     if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false) ){
             level += 1;
@@ -168,10 +168,12 @@ var resetLetters = function(){
         //"Play again" button in both cases
             //on click,return to main page to play again
 function gameOver() {
+    var playAgain = document.getElementById("restart");
     if (counter <= 0 && level >= 0) {
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
         document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
+        playAgain.classList.remove("hide");
     }
     if (level >4) {
         document.getElementById("next").classList.add("hide");
@@ -184,8 +186,6 @@ function gameOver() {
             else {
             document.getElementById("wordHolder").innerHTML = `Congratulations!`;
             }
-        clearInterval(timerId);
-        var playAgain = document.getElementById("restart");
         playAgain.classList.remove("hide");
     }
 };
