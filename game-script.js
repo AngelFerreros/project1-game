@@ -14,15 +14,16 @@ var wordGuess= ""; //to store letterHolder as text and display in wordHolder div
 var wordGuessArray = []; //for handleNext verification
 // array for movie questions/level
 var movieLvl = [
-{ level: 0, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg"},
-{level:1, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg"},
-{level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5"},
-{level:3, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg"},
-{level:4, title:"Speed", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/09ccfe9e-e428-4fda-a9bf-9e193f8e1c63.jpg"}
+{level: 0, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg", gameOverMsg: `Sorry,you ran out of time! The correct answer is Titanic.`},
+{level:1, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg", gameOverMsg: `Sorry,you ran out of time! The correct answer is Armageddon.`},
+{level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5", gameOverMsg: `Sorry,you ran out of time! The correct answer is Avatar.`},
+{level:3, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg", gameOverMsg: `Sorry,you ran out of time! The correct answer is Braveheart.`},
+{level:4, title:"Speed", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/09ccfe9e-e428-4fda-a9bf-9e193f8e1c63.jpg", gameOverMsg: `Sorry,you ran out of time! The correct answer is Speed.`}
 ];
 console.log(movieLvl[0].img);
 
 var gameStart = false;
+
 
 //start page has instructions button and play button
     // if play button is clicked, get user name then go to game page and start game
@@ -81,6 +82,7 @@ var updateTimer = function() {
     displayTimer.innerHTML = "Time's up"
     clearInterval(timerId);
     }
+    gameOver();
 };
 
 console.log(level);
@@ -166,14 +168,29 @@ var resetLetters = function(){
     letterHolder = [];
 };
 
+        // if time's up, hide elements and display game over msg
+        //else, display congratulations msg, use player name if there is input
+        //"Play again" button in both cases
+            //return to main page to play again
+function gameOver() {
+    if (counter <= 0 && level >= 0) {
+        document.getElementById("next").classList.add("hide");
+        document.getElementById("alphabetBtn").classList.add("hide");
+        document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
+    }
+    if (level >4) {
+        document.getElementById("next").classList.add("hide");
+        document.getElementById("alphabetBtn").classList.add("hide");
+        document.getElementById("movie-img").classList.add("hide");
+        document.getElementById("countdown-timer").classList.add("hide");
+            if (player != "") {
+            document.getElementById("wordHolder").innerHTML = `Congratulations,${player}!`;
+            }
+            else {
+            document.getElementById("wordHolder").innerHTML = `Congratulations!`;
+            }
+        clearInterval(timerId);
 
-//function to display end game msg
-// function gameOver() {
-    //if time runs out{remove }
-    //else (player answered all levels)
-        // display time taken plus msg
-            //if name = true {display name}
-            //else, use "stranger"
 
-    //option to click "reset/try again"
-        //return to main page to play again
+    }
+};

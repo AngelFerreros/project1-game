@@ -7,6 +7,9 @@ body{
     /* fix sizing issue when window is smaller*/
 }
 
+.hide{
+    display: none;
+}
 #starter{
     margin: 50px auto;
     text-align: center;
@@ -69,7 +72,4 @@ ul {
     color: #FF0C08;
 }
 
-.hide{
-    display: none;
-}
 
