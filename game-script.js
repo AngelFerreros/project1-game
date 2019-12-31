@@ -186,6 +186,7 @@ function gameOver() {
             else {
             document.getElementById("wordHolder").innerHTML = `Congratulations!`;
             }
+        clearInterval(timerId);
         playAgain.classList.remove("hide");
     }
 };
