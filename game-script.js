@@ -7,7 +7,7 @@ var level = 0; //level counter
 var letterHolder = []; //array to store blanks to fill
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var playGameBtn = document.querySelector("#play");
-var container = document.querySelector(".container"); // to append gamepg
+var container = document.querySelector(".container-fluid"); // to append gamepg
 var img = document.createElement("img");
 var counter = 60;//countdown timer- 60sec for whole game
 var wordGuess= ""; //to store letterHolder as text and display in wordHolder div
@@ -22,21 +22,18 @@ var movieLvl = [
 ];
 console.log(movieLvl[0].img);
 
-var gameStart = false;
-
-
 //start page has instructions button and play button
     // if play button is clicked, get user name then go to game page and start game
 
 //function to hide main page and callback other functions to display game board pg
-var startGame = function(event){
-//get input value(name) for use in msg
+var playGame = function(event){
+//get input value(name) for use in game over msg
     var nameField = document.querySelector("#input");
     var name = nameField.value;
     console.log(name);
     player = name;
 
-//hide main page elements - display:none
+//hide main page elements
     var starterField = document.getElementById("starter");
     starterField.classList.add("hide");
     console.log("hide buttons");
@@ -51,22 +48,17 @@ var startGame = function(event){
     letterBtn();
     initialize();
 
-    gameStart = true;
-
     timerId = setInterval(updateTimer, 1000);
-
 };
 
 //add click event listener on play btn to start game
-playGameBtn.addEventListener("click",startGame);
+playGameBtn.addEventListener("click",playGame);
 console.log(playGameBtn);
 
 //debugger;
 
 // countdown once game starts
-    //every wrong letter guessed = -3 seconds
-    //once timer <= 0 seconds, game over
-    //if player guessed all movies, display time remaining in end game msg
+//once timer <= 0 seconds, game over
 
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
@@ -79,13 +71,14 @@ var updateTimer = function() {
     }
     else if (counter <= 0) {
     console.log("Game Over");
-    displayTimer.innerHTML = "Time's up"
+    displayTimer.innerHTML = "Time's up";
     clearInterval(timerId);
     }
     gameOver();
 };
 
 console.log(level);
+
 //function to display gamepg img
 var displayImg = function(){
     var imgHolder = document.getElementById("movie-img");
@@ -123,7 +116,9 @@ var initialize = function(){
     wordHolder.innerHTML = wordGuess;
 };
 // debugger;
-//on click of letters,check if letterClicked is found in movieTitle.If yes, display
+//on click of letters,check if letterClicked is found in movieTitle.If yes, display.
+//else every wrong letter guessed = -3 seconds
+
 function checkAnswer(event) {
     var letterClicked = event.target.id;
     console.log(letterClicked);
@@ -171,7 +166,7 @@ var resetLetters = function(){
         // if time's up, hide elements and display game over msg
         //else, display congratulations msg, use player name if there is input
         //"Play again" button in both cases
-            //return to main page to play again
+            //on click,return to main page to play again
 function gameOver() {
     if (counter <= 0 && level >= 0) {
         document.getElementById("next").classList.add("hide");
@@ -190,7 +185,13 @@ function gameOver() {
             document.getElementById("wordHolder").innerHTML = `Congratulations!`;
             }
         clearInterval(timerId);
-
-
+        var playAgain = document.getElementById("restart");
+        playAgain.classList.remove("hide");
     }
 };
+
+function restartGame (){
+    window.location.reload(true);
+    console.log(`restart game`);
+};
+document.getElementById("restart").addEventListener("click", restartGame);

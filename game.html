@@ -12,7 +12,7 @@
   </head>
   <body>
 
-    <div class ="container">
+    <div class ="container-fluid">
         <h1>Guess the Movie</h1>
 
         <div id = "starter">
@@ -38,7 +38,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                Test your movie knowledge! <br> Guess the movie title of the image being displayed. Every correct answer garners 1 point. <br> Click play to begin!
+                Each level will display a still shot of a movie scene. </br> You have 60 seconds to guess the movie title based on these images. Click the letters to spell out the movie title. </br> Be careful though, every wrong letter clicked will speed up the timer countdown by 3 seconds. </br> Click play to begin.
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -56,6 +56,7 @@
 
         <div id = "next" onclick="handleNext()">
         </div>
+        <button type= "button" id = "restart" class="hide btn btn-outline-info">Play Again</button>
 
     </div>  <!-- container closing -->
 

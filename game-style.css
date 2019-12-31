@@ -10,6 +10,7 @@ body{
 .hide{
     display: none;
 }
+
 #starter{
     margin: 50px auto;
     text-align: center;
@@ -55,6 +56,14 @@ ul {
     margin: 0 15px;
     /*float:right;
     justify-content: flex-end;*/
+}
+
+#restart{
+    width: 70px;
+    height: 35px;
+    max-width: 80%;
+    color: #F2E500;
+    /*margin: 0 auto;*/
 }
 
 #wordHolder{
