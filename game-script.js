@@ -40,7 +40,8 @@ var playGame = function(event){
 
 //create class for next btn
     var nextLvl = document.getElementById("next");
-    nextLvl.classList.add(".nextBtn");
+    nextLvl.classList.remove("hide");
+    nextLvl.classList.add("nextBtn");
     nextLvl.innerHTML = "Next";
 
 //change background image
@@ -50,8 +51,8 @@ var playGame = function(event){
     letterBtn();
     initialize();
 
-    timerId = setInterval(updateTimer, 1000);
     document.getElementById("countdown-timer").classList.remove("hide");
+    timerId = setInterval(updateTimer, 1000);
 };
 
 //add click event listener on play btn to start game
@@ -73,8 +74,8 @@ var updateTimer = function() {
     console.log(counter);
     }
     else if (counter === 0) {
-    console.log("Game Over");
     displayTimer.innerHTML = "Time's up!";
+    console.log("Game Over");
     clearInterval(timerId);
     }
     gameOver();
@@ -173,7 +174,10 @@ function gameOver() {
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
         document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
+        wordHolder.classList.add("endgameMsg");
         playAgain.classList.remove("hide");
+        playAgain.classList.add("restartBtn");
+        playAgain.innerHTML = "Play Again";
     }
     if (level >4) {
         document.getElementById("next").classList.add("hide");
@@ -181,13 +185,16 @@ function gameOver() {
         document.getElementById("movie-img").classList.add("hide");
         document.getElementById("countdown-timer").classList.add("hide");
             if (player != "") {
-            document.getElementById("wordHolder").innerHTML = `Congratulations,${player}!`;
+            document.getElementById("wordHolder").innerHTML = `Well done, ${player}!`;
             }
             else {
-            document.getElementById("wordHolder").innerHTML = `Congratulations!`;
+            document.getElementById("wordHolder").innerHTML = `Well done!`;
             }
         clearInterval(timerId);
+        wordHolder.classList.add("endgameMsg");
         playAgain.classList.remove("hide");
+        playAgain.classList.add("restartBtn");
+        playAgain.innerHTML = "Play Again";
     }
 };
 

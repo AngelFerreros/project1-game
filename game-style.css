@@ -32,7 +32,7 @@ h1 {
 #countdown-timer{
     position: absolute;
     border-radius: 25px;
-    border: 2px double #CAC311;
+    border: 2px dotted #CAC311;
     font-size: 25px;
     text-align: center;
     width: 100px;
@@ -60,31 +60,52 @@ h1 {
     cursor: pointer;
     border: 1px solid black;
     text-align: center;
-    position: relative;
     bottom: 15px;
 }
 
 .nextBtn{
-    display: flex;
-    border:2px ;
-    color: #E6F400;
+    display:inline-block;
+    left: 205px;
+    bottom: -90px;
+    border: 6px solid #F4E40C;
+    background: #FFFFFF;
+    width: 55px;
+    color: #E9000C;
     margin: 0 15px;
+    padding: 5px;
+    text-align: center;
 }
 
-#restart{
-    bottom:-20px;
-    width: 100px;
+.restartBtn{
+    display: inline-block;
+    position: absolute;
+    bottom: -33px;
+    left: 500px;
+    background: #FFFFFF;
+    border-radius:15px;
+    border: 2px solid #082EF0;
+    text-align: center;
+    width: 85px;
     height: 35px;
-    color: #F2E500;
-    margin: 0 auto;
+
 }
 
-#wordHolder{
+div .restartBtn:hover{
+ background: #E6E6E6;
+}
+
+
+div #wordHolder{
     color: #FFFFFF;
     font-size: 40px;
     margin: 15px 10px;
     padding:15px;
     text-align: center;
+}
+
+.endgameMsg{
+    color: #e80111;
+    font-family: 'Lobster', cursive;
 }
 
 .timerStyle{
