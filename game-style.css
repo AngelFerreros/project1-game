@@ -1,76 +1,89 @@
 body{
-    background-image:url("img/cinema-screen.jpg");
-    height: 100%;
-    width: 100%;
-    background-repeat: no-repeat;
+    background:url("img/cinema-4398725_1280.png") center no-repeat;
     background-size: cover;
-    /* fix sizing issue when window is smaller*/
+    background-attachment: fixed;
 }
 
-.hide{
-    display: none;
+.container-fluid{
+    width: 80%;
+    position: relative;
 }
 
 #starter{
-    margin: 50px auto;
+    margin: 125px auto;
     text-align: center;
+    width: 80%;
+    padding: 20px;
+}
+
+#input{
+    height: 40px;
 }
 
 h1 {
+    color: #DCB631;
     font-family: 'Monoton', cursive;
-    color: #F6F500 !Important;
     font-size: 90px;
-    color: #FFFF;
     text-align: center;
     margin: 20px auto;
+    padding: 15px;
+}
+
+#countdown-timer{
+    position: absolute;
+    border-radius: 25px;
+    border: 2px double #CAC311;
+    font-size: 25px;
+    text-align: center;
+    width: 100px;
+    top: 30px;
+    right: 15px;
 }
 
 .img-fluid{
     display:block;
+    margin: 0 auto;
     width: 500px;
     height: 380px;
-    margin: 0 auto;
-    border: 5px solid #FFFFFF;
+    border: 5px solid #B79612;
 }
 
-ul {
+#alphabetBtn li{
     list-style-type: none;
-}
-
-#alphabet li{
-    float:left;
-    clear: right;
-    list-style:none;
-    margin: 30px 10px 10px 0;
-    width:35px;
-    height:30px;
-    color: #FFFFFF;
-    cursor:pointer;
-    border: solid 1px #FFFFFF;
+    background: #FFFFFF;
+    float: left;
+    clear:right;
+    margin: 10px;
+    width: 30px;
+    height: 30px;
+    color: #FB0008;
+    cursor: pointer;
+    border: 1px solid black;
     text-align: center;
+    position: relative;
+    bottom: 15px;
 }
 
 .nextBtn{
-    display: inline-block;
+    display: flex;
+    border:2px ;
     color: #E6F400;
     margin: 0 15px;
-    /*float:right;
-    justify-content: flex-end;*/
 }
 
 #restart{
-    width: 70px;
+    bottom:-20px;
+    width: 100px;
     height: 35px;
-    max-width: 80%;
     color: #F2E500;
-    /*margin: 0 auto;*/
+    margin: 0 auto;
 }
 
 #wordHolder{
     color: #FFFFFF;
-    font-size: 45px;
-    margin: 15px 10px 10px 0px;
-    padding:5px;
+    font-size: 40px;
+    margin: 15px 10px;
+    padding:15px;
     text-align: center;
 }
 
@@ -81,4 +94,6 @@ ul {
     color: #FF0C08;
 }
 
-
+.hide{
+    display: none;
+}
