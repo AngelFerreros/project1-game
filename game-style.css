@@ -50,8 +50,8 @@ h1 {
 
 ul{
     max-width:80%;
+    position: relative;
 }
-
 
 #alphabetBtn li{
     list-style-type: none;
@@ -61,29 +61,31 @@ ul{
     margin: 10px;
     width: 30px;
     height: 30px;
-    color: #FB0008;
+    color: #140A08;
     cursor: pointer;
-    border: 1px solid black;
+    border: 4px double #9E2959;
     text-align: center;
     bottom: 15px;
 }
 
 .nextBtn{
     display:inline-block;
-    left: 205px;
-    bottom: -90px;
-    border: 6px solid #F4E40C;
+    position: absolute;
+    font-weight: bold;
+    bottom: -80px;
+    right: 130px;
     background: #FFFFFF;
-    width: 55px;
-    color: #E9000C;
-    margin: 0 15px;
-    padding: 5px;
+    border-radius:15px;
+    border: 2px solid #74451D;
     text-align: center;
+    width: 85px;
+    height: 35px;
 }
 
 .restartBtn{
     display: inline-block;
     position: absolute;
+    font-weight: bold;
     bottom: -33px;
     left: 500px;
     background: #FFFFFF;
@@ -92,13 +94,11 @@ ul{
     text-align: center;
     width: 85px;
     height: 35px;
-
 }
 
-div .restartBtn:hover{
+.nextBtn:hover,.restartBtn:hover{
  background: #E6E6E6;
 }
-
 
 .underscores{
     color: #FFFFFF;
