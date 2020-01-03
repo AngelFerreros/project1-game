@@ -58,8 +58,7 @@ var playGame = function(event){
 //add click event listener on play btn to start game
 playGameBtn.addEventListener("click",playGame);
 console.log(playGameBtn);
-
-//debugger;
+console.log(level);
 
 // countdown once game starts
 //once timer = 0 seconds, game over
@@ -68,7 +67,7 @@ var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
     displayTimer.classList.add(".timerStyle");
 
-    if ((counter <= 60) && (counter != 0)) {
+    if (counter <= 60 && counter != -1) {
     displayTimer.innerHTML = ` Timer:\n 00:${counter}`;
     counter--;
     console.log(counter);
@@ -81,9 +80,7 @@ var updateTimer = function() {
     gameOver();
 };
 
-console.log(level);
-
-//function to display gamepg img
+//function to display movie img
 var displayImg = function(){
     var imgHolder = document.getElementById("movie-img");
     img.classList.add("img-fluid");
@@ -93,13 +90,15 @@ var displayImg = function(){
 
 //create alphabet btns
 var letterBtn = function(){
+        var letterHolder = document.createElement("ul");
         for (var i = 0; i < alphabet.length; i++) {
         var list = document.createElement("li");
         console.log(alphabet[i]);
         list.id = alphabet[i];
         list.innerHTML = alphabet[i];
         list.addEventListener("click",checkAnswer);
-        alphabetBtn.appendChild(list);
+        letterHolder.appendChild(list);
+        alphabetBtn.appendChild(letterHolder);
         }
 };
 
@@ -115,6 +114,7 @@ var initialize = function(){
     }
     wordGuess = letterHolder.join(" ");
     wordHolder.innerHTML = wordGuess;
+    wordHolder.classList.add("underscores");
 };
 // debugger;
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display.
@@ -147,7 +147,7 @@ function checkAnswer(event) {
 //else move to the next level - change image and re-initialize
 // debugger;
 var handleNext = function (event) {
-    if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false) ){
+    if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false)){
             level += 1;
             console.log(level);
             img.src = movieLvl[level].img;
@@ -174,6 +174,7 @@ function gameOver() {
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
         document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
+        wordHolder.removeAttribute("class");
         wordHolder.classList.add("endgameMsg");
         playAgain.classList.remove("hide");
         playAgain.classList.add("restartBtn");
@@ -185,13 +186,13 @@ function gameOver() {
         document.getElementById("movie-img").classList.add("hide");
         document.getElementById("countdown-timer").classList.add("hide");
             if (player != "") {
-            document.getElementById("wordHolder").innerHTML = `Well done, ${player}!`;
+            document.getElementById("wordHolder").innerHTML = `Well done, ${player}! You are a certified cinephile.`;
             }
             else {
-            document.getElementById("wordHolder").innerHTML = `Well done!`;
+            document.getElementById("wordHolder").innerHTML = `Well done, you movie buff!`;
             }
         clearInterval(timerId);
-        wordHolder.classList.add("endgameMsg");
+        wordHolder.classList.add("winMsg");
         playAgain.classList.remove("hide");
         playAgain.classList.add("restartBtn");
         playAgain.innerHTML = "Play Again";
