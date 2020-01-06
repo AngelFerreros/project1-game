@@ -64,16 +64,16 @@ playGameBtn.addEventListener("click",playGame);
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
     displayTimer.classList.add(".timerStyle");
-
+// && counter != 0)
     if (counter <= 60 && counter != 0) {
-    displayTimer.innerHTML = ` Timer:\n 00:${counter}`;
     counter--;
+    displayTimer.innerHTML = ` Timer:\n 00:${counter}`;
     console.log(counter);
     }
-    else if (counter === 0) {
+    else if (counter <=0) {
     displayTimer.innerHTML = "Time's up!";
-    console.log("Game Over");
     clearInterval(timerId);
+    console.log("Game Over");
     }
     gameOver();
 };
