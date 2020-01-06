@@ -64,13 +64,13 @@ playGameBtn.addEventListener("click",playGame);
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
     displayTimer.classList.add(".timerStyle");
-// && counter != 0)
-    if (counter <= 60 && counter != 0) {
+
+    if (counter <= 60 && counter != 0 && counter > -1) {
     counter--;
     displayTimer.innerHTML = ` Timer:\n 00:${counter}`;
     console.log(counter);
     }
-    else if (counter <=0) {
+    else {
     displayTimer.innerHTML = "Time's up!";
     clearInterval(timerId);
     console.log("Game Over");
