@@ -118,7 +118,7 @@ var initialize = function(){
 
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display.
 //else every wrong letter guessed = -3 seconds
-debugger;
+// debugger;
 var wordGuessArray = []; //for answer verification
 function checkAnswer(event) {
     var letterClicked = event.target.id;
@@ -167,7 +167,7 @@ var resetLetters = function(){
         //else, display congratulations msg, use player name if there is input
         //"Play again" button in both cases
             //on click,return to main page to play again
-debugger;
+// debugger;
 function gameOver() {
     var playAgain = document.getElementById("restart");
     if (counter <= 0 && level >= 0) {

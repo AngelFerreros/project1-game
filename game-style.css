@@ -41,11 +41,10 @@ h1 {
 }
 
 .img-fluid{
+    border: 5px solid #B79612;
     display:block;
     margin: 0 auto;
-    width: 500px;
     height: 380px;
-    border: 5px solid #B79612;
 }
 
 ul{
@@ -59,8 +58,8 @@ ul{
     float: left;
     clear:right;
     margin: 10px;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     color: #140A08;
     cursor: pointer;
     border: 4px double #9E2959;
