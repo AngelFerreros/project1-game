@@ -200,7 +200,7 @@ function gameOver() {
 };
 
 function restartGame (){
-    window.location.reload(true);
+    window.location.reload();
     console.log(`restart game`);
 };
 document.getElementById("restart").addEventListener("click", restartGame);
