@@ -1,13 +1,15 @@
 console.log("js working");
 
 var player; //store name for msg later
+var timerId; //timerId for timer countdown
 var titleArray = [];//to store movie title as array
 var score = 0;
 var level = 0; //level counter
 var letterHolder = []; //array to store blanks to fill
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var counter = 60;//countdown timer- 60sec for whole game
-
+var letterTyped; //to store letter typed by player (keyup event attached)
+var letterClicked; //to store letter clicked (click event attached)
 
 // array for movie questions/level
 var movieLvl = [
@@ -44,6 +46,9 @@ var playGame = function(event){
     displayImg();
     letterBtn();
     initialize();
+
+// add keyup event to enable typing of letters
+document.addEventListener("keyup",typeLetter);
 
 //create class for next btn
     var nextLvl = document.getElementById("next");
@@ -104,7 +109,7 @@ var letterBtn = function(){
 // Create function to load array for letters to be guessed
 var initialize = function(){
     var movieTitle = movieLvl[level].title;
-    titleArray = movieTitle.split("");
+    titleArray = movieTitle.toLowerCase().split("");
     console.log(titleArray.length);
     var wordGuess=""; //to store letterHolder as text and display in wordHolder div
     for (var j = 0; j < titleArray.length; j++) {
@@ -116,16 +121,28 @@ var initialize = function(){
     wordHolder.classList.add("underscores");
 };
 
+//function to get letter typed
+function typeLetter (event){
+    letterTyped = event.key;
+    console.log(letterTyped);
+    checkAnswer();
+};
+
+
+function clickLetter (event){
+    letterClicked = event.target.id;
+    console.log(letterClicked);
+    checkAnswer();
+};
+
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display.
 //else every wrong letter guessed = -3 seconds
 // debugger;
 var wordGuessArray = []; //for answer verification
 function checkAnswer(event) {
-    var letterClicked = event.target.id;
-    console.log(letterClicked);
     for (var e = 0; e < titleArray.length ; e++) {
         var correctLetter = titleArray[e].toLowerCase();
-            if (letterClicked === correctLetter){
+            if (letterClicked === correctLetter || letterTyped === correctLetter){
             var position = e;
             console.log(position);
             letterHolder[e] = correctLetter;
@@ -135,7 +152,7 @@ function checkAnswer(event) {
         wordGuessArray = letterHolder;
         console.log(wordGuessArray);
     }
-        if (titleArray.includes(letterClicked) === false) {
+        if ((titleArray.includes(letterClicked) === false) || (titleArray.includes(letterTyped) === false)) {
         console.log(titleArray);
         counter = counter - 3;
         console.log(counter);
@@ -154,7 +171,7 @@ var handleNext = function (event) {
         initialize();
     }
     else {
-            alert(`Please make a guess!`);
+            alert(`Please make a guess!`); //can use modal instead of alert
     }
 };
 
@@ -210,8 +227,6 @@ function loseAudio (){
     var loseSound = document.getElementById("lose");
     loseSound.play();
 };
-
-
 
 //to restart whole game
 function restartGame (){
