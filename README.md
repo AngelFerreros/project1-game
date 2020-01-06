@@ -15,5 +15,4 @@ Installation Instructions:
 None.
 
 Unsolved Problems:
-1. The countdown timer can sometimes go into a negative number, if the timer is close to 0 and a wrong letter is clicked.
-2. I wanted to put an image as a "Next button" but had problems placing the text on top of the image. I was able to adjust the style manually in the Chrome developer tool. However, applying it on my CSS sheet and updating the browser did not seem to work.
+1. I wanted to put an image as a "Next button" but had problems placing the text on top of the image. I was able to adjust the style manually in the Chrome developer tool. However, applying it on my CSS sheet and updating the browser did not seem to work.

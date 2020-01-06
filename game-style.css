@@ -108,12 +108,7 @@ ul{
     text-align: center;
 }
 
-.winMsg{
-    color: #ff8d00fa;
-    font-family: 'Lobster', cursive;
-}
-
-.endgameMsg{
+.winMsg, .endgameMsg{
     color: #f3e10d;
     font-family: 'Lobster', cursive;
     font-size: 35px;

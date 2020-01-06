@@ -147,15 +147,15 @@ function checkAnswer(event) {
 //else move to the next level - change image and re-initialize
 var handleNext = function (event) {
     if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false)){
-            level += 1;
-            console.log(level);
-            img.src = movieLvl[level].img;
-            resetLetters();
-            initialize();
-        }
+        level += 1;
+        console.log(level);
+        img.src = movieLvl[level].img;
+        resetLetters();
+        initialize();
+    }
     else {
             alert(`Please make a guess!`);
-        }
+    }
 };
 
 // reset letters guessed
@@ -171,6 +171,7 @@ var resetLetters = function(){
 function gameOver() {
     var playAgain = document.getElementById("restart");
     if (counter <= 0 && level >= 0) {
+        loseAudio();
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
         document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
@@ -180,7 +181,8 @@ function gameOver() {
         playAgain.classList.add("restartBtn");
         playAgain.innerHTML = "Play Again";
     }
-    if (level >4) {
+    if (level > movieLvl.length-1) {
+        winAudio();
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
         document.getElementById("movie-img").classList.add("hide");
@@ -199,6 +201,19 @@ function gameOver() {
     }
 };
 
+//to play audio
+function winAudio (){
+    var winSound = document.getElementById("win");
+    winSound.play();
+};
+function loseAudio (){
+    var loseSound = document.getElementById("lose");
+    loseSound.play();
+};
+
+
+
+//to restart whole game
 function restartGame (){
     window.location.reload();
     console.log(`restart game`);
