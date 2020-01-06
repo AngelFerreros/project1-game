@@ -75,7 +75,10 @@ var updateTimer = function() {
     displayTimer.innerHTML = ` Timer:\n 00:${counter}`;
     console.log(counter);
     }
-    else {
+    if (counter <=10) {
+    document.getElementById("countdown-timer").classList.add("timer-warn");
+    }
+    if (counter === 0){
     displayTimer.innerHTML = "Time's up!";
     clearInterval(timerId);
     console.log("Game Over");
@@ -223,6 +226,7 @@ function winAudio (){
     var winSound = document.getElementById("win");
     winSound.play();
 };
+
 function loseAudio (){
     var loseSound = document.getElementById("lose");
     loseSound.play();

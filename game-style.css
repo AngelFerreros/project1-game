@@ -40,6 +40,20 @@ h1 {
     right: 15px;
 }
 
+.timer-warn{
+    position: absolute;
+    background-color: red;
+    font-weight: bold;
+    border-radius: 25px;
+    border: 2px solid #CAC311;
+    font-size: 25px;
+    text-align: center;
+    width: 100px;
+    top: 30px;
+    right: 15px;
+
+}
+
 .img-fluid{
     border: 5px solid #B79612;
     display:block;
