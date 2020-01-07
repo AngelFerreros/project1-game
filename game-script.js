@@ -16,14 +16,15 @@ var click;// to store boolean value if player clicked letters
 
 // array for movie questions/level
 var movieLvl = [
-{level: 0, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Titanic.`},
+{level: 0, title:`Kill Bill` , img:"https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_100,f_auto,fl_lossy,w_640,c_limit/cdn/6c271728-6338-4fef-97d3-936023324eef/d6ad83c5-3de9-4b74-8fa7-8733a88086a4.jpg" , gameOverMsg: `Sorry, you ran out of time! The correct answer is Kill Bill.`},
 {level:1, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Armageddon.`},
 {level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5", gameOverMsg: `Sorry, you ran out of time! The correct answer is Avatar.`},
 {level:3, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Braveheart.`},
-{level:4, title:"Whiplash", img: "https://m.media-amazon.com/images/M/MV5BYjZlMDkyY2MtNmY4ZS00YTJjLTkzMjgtNWQ1MTBlN2QyYmM1XkEyXkFqcGdeQXVyNTc3MjUzNTI@._V1_.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Whiplash.`}
+{level:4, title:"Whiplash", img: "https://m.media-amazon.com/images/M/MV5BYjZlMDkyY2MtNmY4ZS00YTJjLTkzMjgtNWQ1MTBlN2QyYmM1XkEyXkFqcGdeQXVyNTc3MjUzNTI@._V1_.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Whiplash.`},
+{level:5, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Titanic.`}
 ];
 console.log(level);
-console.log(movieLvl[0].img);
+console.log(movieLvl[0].title);
 
 //start page has instructions button and play button
     // if play button is clicked, get user name then go to game page and start game
@@ -119,7 +120,12 @@ var initialize = function(){
     console.log(titleArray.length);
     var wordGuess=""; //to store letterHolder as text and display in wordHolder div
     for (var j = 0; j < titleArray.length; j++) {
-        letterHolder[j] = "_";
+         if (titleArray[j] == " ") {
+        letterHolder[j] = "&nbsp;";
+        }
+        else {
+            letterHolder[j] = "_";
+        }
         console.log(letterHolder);
     }
     wordGuess = letterHolder.join(" ");
@@ -174,19 +180,22 @@ function checkAnswer(event) {
             wordGuess = letterHolder.join(" ");
             wordHolder.innerHTML = wordGuess;
             }
+
+        rightGuess();
         wordGuessArray = letterHolder;
         console.log(wordGuessArray);
         }
-
         if (click === true && titleArray.includes(letterClicked) === false){
         console.log(letterClicked);
         document.getElementById(letterClicked).style.backgroundColor="red";
+        wrongGuess();
         counter = counter - 3;
         console.log(counter);
         }
         if (keyboard === true && titleArray.includes(keyTyped) === false) {
         console.log(keyTyped);
         document.getElementById(keyTyped).style.backgroundColor="red";
+        wrongGuess();
         counter = counter - 3;
         console.log(counter);
         }
@@ -273,6 +282,18 @@ function loseAudio (){
     var loseSound = document.getElementById("lose");
     loseSound.play();
 };
+
+function wrongGuess (){
+    var wrongSound = document.getElementById("wrong");
+    wrongSound.play();
+};
+
+function rightGuess(){
+    var correctSound = document.getElementById("correct");
+    correctSound.play();
+};
+
+
 
 //to restart whole game
 function restartGame (){
