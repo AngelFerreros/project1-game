@@ -15,7 +15,7 @@ var click;// to store boolean value if player clicked letters
 
 // array for movie questions/level
 var movieLvl = [
-{level: 0, title:`Kill Bill` , img:"https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_100,f_auto,fl_lossy,w_640,c_limit/cdn/6c271728-6338-4fef-97d3-936023324eef/d6ad83c5-3de9-4b74-8fa7-8733a88086a4.jpg" , gameOverMsg: `Sorry, you ran out of time! The correct answer is Kill Bill.`},
+{level: 0, title:"Cast Away", img:"https://cdn.now.howstuffworks.com/media-content/8784b0c7-7023-4113-ad0d-dcf160211017-1210-680.jpg" , gameOverMsg: `Sorry, you ran out of time! The correct answer is Cast Away.`},
 {level:1, title:"Armageddon", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/db87f889-29f6-4cfd-8348-d29546474e46.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Armageddon.`},
 {level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5", gameOverMsg: `Sorry, you ran out of time! The correct answer is Avatar.`},
 {level:3, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Braveheart.`},
@@ -27,16 +27,20 @@ console.log(level);
 console.log(movieLvl[0].title);
 
 // Shuffle the movieLvl array
-function randomiseMovie(movieLvl) {
+function shuffleArray(movieLvl) {
     for (let i = movieLvl.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * i);
-        const temp = movieLvl[i];
+        const j = Math.floor(Math.random() * i); //random index
+        // pick remaining movie and swap it with current movie
+        const tempValue = movieLvl[i];
+        console.log(tempValue);
         movieLvl[i] = movieLvl[j];
-        movieLvl[j] = temp;
+        console.log(movieLvl[i]);
+        movieLvl[j] = tempValue;
+        console.log(movieLvl[j]);
     }
 }
 // Might as well shuffle them now as well as later.
-randomiseMovie(movieLvl);
+shuffleArray(movieLvl);
 
 //start page has instructions button and play button
     // if play button is clicked, get user name then go to game page and start game
@@ -255,9 +259,9 @@ function gameOver() {
         loseAudio();
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
+        document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
         wordHolder.classList.remove("underscores");
         wordHolder.classList.add("endgameMsg");
-        document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
         playAgain.classList.remove("hide");
         playAgain.classList.add("restartBtn");
         playAgain.innerHTML = "Play Again";

@@ -17,3 +17,4 @@ None.
 
 Unsolved Problems:
 1. I wanted to put an image as a "Next button" but had problems placing the text on top of the image. I was able to adjust the style manually in the Chrome developer tool. However, applying it on my CSS sheet and updating the browser did not seem to work.
+2. When time runs out but the player might be typing too fast,there can be tendency where the game over message is overwritten and replaced with the movie title array.
