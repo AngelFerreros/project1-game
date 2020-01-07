@@ -1,8 +1,9 @@
 Project #1: The Game
 
 Game: Guess the movie
+
 Technologies Used:
-Used HTML, CSS- with Bootstrap for the modal button and Javascript.
+Used HTML, CSS- with Bootstrap for the modal buttons and pop up window and Javascript.
 
 The Approach Taken:
 Before writing code, I developed the pseudo-code and game flow. I drew out the user interface I had in mind and the steps to be taken by the player. This then helped me in identifying what is needed in the code ( i.e. using arrays, functions, loops).

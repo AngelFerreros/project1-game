@@ -38,7 +38,6 @@ function randomiseMovie(movieLvl) {
 // Might as well shuffle them now as well as later.
 randomiseMovie(movieLvl);
 
-
 //start page has instructions button and play button
     // if play button is clicked, get user name then go to game page and start game
 
@@ -67,11 +66,9 @@ var playGame = function(event){
 // add keyup event to enable typing of letters and right arrow key
 document.addEventListener("keyup",key);
 
-
 //create class for next btn
     var nextLvl = document.getElementById("next");
     nextLvl.classList.remove("hide");
-    // nextLvl.classList.add("nextBtn");
 
 //timer starts
     document.getElementById("countdown-timer").classList.remove("hide");
@@ -152,9 +149,8 @@ function key (event){
     console.log(keyTyped);
     keyboard = true;
         if (keyTyped == "ArrowRight"){
-                console.log(keyTyped == "ArrowRight");
-
-            handleNext();
+        console.log(keyTyped == "ArrowRight");
+        handleNext();
         }
         else {
         checkAnswer();
@@ -171,7 +167,7 @@ function clickLetter (event){
 
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display.
 //else every wrong letter guessed = -3 seconds
-// debugger;
+debugger;
 var wordGuessArray = []; //for answer verification
 function checkAnswer(event) {
     for (var e = 0; e < titleArray.length ; e++) {
@@ -233,6 +229,7 @@ var handleNext = function (event) {
     document.querySelector(".modal-body").innerHTML="Please make a guess!";
     }
 };
+
 //function to clear styles of alphabet li for next level
 function clearStyle (){
     var letterTile = document.getElementsByTagName('li');
@@ -251,16 +248,16 @@ function resetLetters (){
         //else, display congratulations msg, use player name if there is input
         //"Play again" button in both cases
             //on click,return to main page to play again
-// debugger;
+debugger;
 function gameOver() {
     var playAgain = document.getElementById("restart");
     if (counter <= 0 && level >= 0) {
         loseAudio();
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
-        document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
         wordHolder.classList.remove("underscores");
         wordHolder.classList.add("endgameMsg");
+        document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
         playAgain.classList.remove("hide");
         playAgain.classList.add("restartBtn");
         playAgain.innerHTML = "Play Again";
@@ -305,8 +302,6 @@ function rightGuess(){
     var correctSound = document.getElementById("correct");
     correctSound.play();
 };
-
-
 
 //to restart whole game
 function restartGame (){

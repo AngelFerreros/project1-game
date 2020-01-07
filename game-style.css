@@ -80,20 +80,6 @@ ul{
     bottom: 15px;
 }
 
-.nextBtn{
-    display:inline-block;
-    position: absolute;
-    font-weight: bold;
-    bottom: -80px;
-    right: 130px;
-    background: #FFFFFF;
-    border-radius:15px;
-    border: 2px solid #74451D;
-    text-align: center;
-    width: 85px;
-    height: 35px;
-}
-
 .restartBtn{
     display: inline-block;
     position: absolute;
@@ -108,7 +94,7 @@ ul{
     height: 35px;
 }
 
-.nextBtn:hover,.restartBtn:hover{
+.restartBtn:hover{
  background: #E6E6E6;
 }
 
