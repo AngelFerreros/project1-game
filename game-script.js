@@ -12,7 +12,7 @@ var keyTyped; //to store value typed by player (keyup event attached)
 var letterClicked; //to store letter clicked (click event attached)
 var keyboard; // to store boolean value if player used keyboard
 var click;// to store boolean value if player clicked letters
-// var arrowKey; //store value of arrow key pressed
+
 
 // array for movie questions/level
 var movieLvl = [
@@ -52,12 +52,12 @@ var playGame = function(event){
 
 // add keyup event to enable typing of letters and right arrow key
 document.addEventListener("keyup",key);
-// document.addEventListener("keyup",arrows);
+
 
 //create class for next btn
     var nextLvl = document.getElementById("next");
     nextLvl.classList.remove("hide");
-    nextLvl.classList.add("nextBtn");
+    // nextLvl.classList.add("nextBtn");
 
 //timer starts
     document.getElementById("countdown-timer").classList.remove("hide");
@@ -69,7 +69,6 @@ playGameBtn.addEventListener("click",playGame);
 
 // countdown once game starts
 //once timer = 0 seconds, game over
-
 var updateTimer = function() {
     var displayTimer = document.getElementById("countdown-timer");
     displayTimer.classList.add(".timerStyle");
@@ -133,7 +132,9 @@ function key (event){
     keyTyped = event.key;
     console.log(keyTyped);
     keyboard = true;
-        if (keyTyped === "ArrowRight"){
+        if (keyTyped == "ArrowRight"){
+                console.log(keyTyped == "ArrowRight");
+
             handleNext();
         }
         else {
@@ -148,12 +149,6 @@ function clickLetter (event){
     click = true;
     checkAnswer();
 };
-
-// function arrows (event){
-//     arrowKey = event.key;
-//     console.log(arrowKey);
-// }
-
 
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display.
 //else every wrong letter guessed = -3 seconds
@@ -201,27 +196,32 @@ function checkAnswer(event) {
 //convert wordGuess string into array for comparison with letterHolder
 //else move to the next level - change image and re-initialize
 var handleNext = function (event) {
-    var letterTile = document.getElementsByTagName('li');
-    console.log(letterTile);
-    for (i = 0; i < alphabet.length; i++) {
-    letterTile[i].style.backgroundColor="white";
-    }
     if (letterHolder === wordGuessArray && letterHolder.includes("_") == false) {
         level += 1;
         console.log(level);
         img.src = movieLvl[level].img;
         resetLetters();
         initialize();
+        clearStyle();
     }
     else {
-        //can use modal instead of alert
-        // alert(`Please make a guess!`);
-
+        // modal popup window to show warning
+    $('#exampleModalCenter').modal('toggle');
+    document.getElementById("exampleModalCenterTitle").innerHTML = "Warning";
+    document.querySelector(".modal-body").innerHTML="Please make a guess!";
+    }
+};
+//function to clear styles of alphabet li for next level
+function clearStyle (){
+    var letterTile = document.getElementsByTagName('li');
+    console.log(letterTile);
+    for (i = 0; i < alphabet.length; i++) {
+    letterTile[i].style.backgroundColor="white";
     }
 };
 
 // reset letters guessed
-var resetLetters = function(){
+function resetLetters (){
     letterHolder = [];
 };
 

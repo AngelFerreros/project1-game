@@ -36,7 +36,7 @@
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Instructions</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                  <!-- <span aria-hidden="true">&times;</span> -->
                 </button>
               </div>
               <div class="modal-body">
@@ -56,7 +56,8 @@
         <div id = "alphabetBtn">
         </div>
 
-        <div id = "next" class="hide" onclick= "handleNext()">Next</div>
+        <button type="button" id = "next" class="hide btn btn-warning" data-target="#exampleModalCenter" onclick= "handleNext()">Next</button>
+
 
         <div id = "restart" class="hide"> </div>
         <audio id = "win" src = "Won!.wav" type = "audio/wav"></audio>
