@@ -13,7 +13,6 @@ var letterClicked; //to store letter clicked (click event attached)
 var keyboard; // to store boolean value if player used keyboard
 var click;// to store boolean value if player clicked letters
 
-
 // array for movie questions/level
 var movieLvl = [
 {level: 0, title:`Kill Bill` , img:"https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_100,f_auto,fl_lossy,w_640,c_limit/cdn/6c271728-6338-4fef-97d3-936023324eef/d6ad83c5-3de9-4b74-8fa7-8733a88086a4.jpg" , gameOverMsg: `Sorry, you ran out of time! The correct answer is Kill Bill.`},
@@ -21,10 +20,24 @@ var movieLvl = [
 {level: 2, title: "Avatar", img: "https://static2.thequizimages.com/wordpress/wp-content/uploads/2018/03/movie-question-30.jpg?q=50&fit=crop&w=963&h=448&dpr=1.5", gameOverMsg: `Sorry, you ran out of time! The correct answer is Avatar.`},
 {level:3, title:"Braveheart", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_auto:good,f_auto,fl_lossy,w_640,c_limit/cdn/dd309a21-0df8-4d22-8d0c-3599b0fae15c/37e77cfb-5788-491d-88ac-a9fb9f8bb72e.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Braveheart.`},
 {level:4, title:"Whiplash", img: "https://m.media-amazon.com/images/M/MV5BYjZlMDkyY2MtNmY4ZS00YTJjLTkzMjgtNWQ1MTBlN2QyYmM1XkEyXkFqcGdeQXVyNTc3MjUzNTI@._V1_.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Whiplash.`},
-{level:5, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Titanic.`}
+{level:5, title: "Titanic", img:"https://www.rd.com/wp-content/uploads/2018/09/Titanic-1024x683.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Titanic.`},
+{level:6, title:"Million Dollar Baby", img: "https://img.playbuzz.com/image/upload/ar_1.5,c_pad,f_jpg,b_auto/q_100,f_auto,fl_lossy,w_640,c_limit/cdn/6c271728-6338-4fef-97d3-936023324eef/94b20497-ec46-46de-8a36-d0f280c9bd98.jpg", gameOverMsg: `Sorry, you ran out of time! The correct answer is Million Dollar Baby.`}
 ];
 console.log(level);
 console.log(movieLvl[0].title);
+
+// Shuffle the movieLvl array
+function randomiseMovie(movieLvl) {
+    for (let i = movieLvl.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * i);
+        const temp = movieLvl[i];
+        movieLvl[i] = movieLvl[j];
+        movieLvl[j] = temp;
+    }
+}
+// Might as well shuffle them now as well as later.
+randomiseMovie(movieLvl);
+
 
 //start page has instructions button and play button
     // if play button is clicked, get user name then go to game page and start game
@@ -77,12 +90,12 @@ var updateTimer = function() {
     if (counter <= 60 && counter != 0 && counter > -1) {
     counter--;
     displayTimer.innerHTML = ` Timer:\n 00:${counter}`;
+        if (counter <=10) {
+        document.getElementById("countdown-timer").classList.add("timer-warn");
+        }
     console.log(counter);
     }
-    if (counter <=10) {
-    document.getElementById("countdown-timer").classList.add("timer-warn");
-    }
-    if (counter === 0){
+    if (counter <= 0){
     displayTimer.innerHTML = "Time's up!";
     clearInterval(timerId);
     console.log("Game Over");
@@ -165,6 +178,7 @@ function checkAnswer(event) {
         var correctLetter = titleArray[e].toLowerCase();
             if (click === true && letterClicked === correctLetter) {
             document.getElementById(letterClicked).style.backgroundColor="green";
+            rightGuess();
             var position = e;
             console.log(position);
             letterHolder[e] = correctLetter;
@@ -174,14 +188,13 @@ function checkAnswer(event) {
 
             if (keyboard === true && keyTyped === correctLetter) {
             document.getElementById(keyTyped).style.backgroundColor="green";
+            rightGuess();
             var position = e;
             console.log(position);
             letterHolder[e] = correctLetter;
             wordGuess = letterHolder.join(" ");
             wordHolder.innerHTML = wordGuess;
             }
-
-        rightGuess();
         wordGuessArray = letterHolder;
         console.log(wordGuessArray);
         }
@@ -246,7 +259,7 @@ function gameOver() {
         document.getElementById("next").classList.add("hide");
         document.getElementById("alphabetBtn").classList.add("hide");
         document.getElementById("wordHolder").innerHTML = movieLvl[level].gameOverMsg;
-        wordHolder.removeAttribute("class");
+        wordHolder.classList.remove("underscores");
         wordHolder.classList.add("endgameMsg");
         playAgain.classList.remove("hide");
         playAgain.classList.add("restartBtn");
