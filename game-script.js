@@ -201,6 +201,11 @@ function checkAnswer(event) {
 //convert wordGuess string into array for comparison with letterHolder
 //else move to the next level - change image and re-initialize
 var handleNext = function (event) {
+    var letterTile = document.getElementsByTagName('li');
+    console.log(letterTile);
+    for (i = 0; i < alphabet.length; i++) {
+    letterTile[i].style.backgroundColor="white";
+    }
     if (letterHolder === wordGuessArray && letterHolder.includes("_") == false) {
         level += 1;
         console.log(level);
