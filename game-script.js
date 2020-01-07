@@ -8,8 +8,11 @@ var level = 0; //level counter
 var letterHolder = []; //array to store blanks to fill
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var counter = 60;//countdown timer- 60sec for whole game
-var letterTyped; //to store letter typed by player (keyup event attached)
+var keyTyped; //to store value typed by player (keyup event attached)
 var letterClicked; //to store letter clicked (click event attached)
+var keyboard; // to store boolean value if player used keyboard
+var click;// to store boolean value if player clicked letters
+// var arrowKey; //store value of arrow key pressed
 
 // array for movie questions/level
 var movieLvl = [
@@ -47,8 +50,9 @@ var playGame = function(event){
     letterBtn();
     initialize();
 
-// add keyup event to enable typing of letters
-document.addEventListener("keyup",typeLetter);
+// add keyup event to enable typing of letters and right arrow key
+document.addEventListener("keyup",key);
+// document.addEventListener("keyup",arrows);
 
 //create class for next btn
     var nextLvl = document.getElementById("next");
@@ -103,7 +107,7 @@ var letterBtn = function(){
         console.log(alphabet[i]);
         list.id = alphabet[i];
         list.innerHTML = alphabet[i];
-        list.addEventListener("click",checkAnswer);
+        list.addEventListener("click",clickLetter);
         alphabetHolder.appendChild(list);
         alphabetBtn.appendChild(alphabetHolder);
         }
@@ -124,19 +128,32 @@ var initialize = function(){
     wordHolder.classList.add("underscores");
 };
 
-//function to get letter typed
-function typeLetter (event){
-    letterTyped = event.key;
-    console.log(letterTyped);
-    checkAnswer();
+//function to get letter typed and checkAnswer
+function key (event){
+    keyTyped = event.key;
+    console.log(keyTyped);
+    keyboard = true;
+        if (keyTyped === "ArrowRight"){
+            handleNext();
+        }
+        else {
+        checkAnswer();
+        }
 };
 
-
+//function to get letter clicked and checkAnswer
 function clickLetter (event){
     letterClicked = event.target.id;
     console.log(letterClicked);
+    click = true;
     checkAnswer();
 };
+
+// function arrows (event){
+//     arrowKey = event.key;
+//     console.log(arrowKey);
+// }
+
 
 //on click of letters,check if letterClicked is found in movieTitle.If yes, display.
 //else every wrong letter guessed = -3 seconds
@@ -145,7 +162,17 @@ var wordGuessArray = []; //for answer verification
 function checkAnswer(event) {
     for (var e = 0; e < titleArray.length ; e++) {
         var correctLetter = titleArray[e].toLowerCase();
-            if (letterClicked === correctLetter || letterTyped === correctLetter){
+            if (click === true && letterClicked === correctLetter) {
+            document.getElementById(letterClicked).style.backgroundColor="green";
+            var position = e;
+            console.log(position);
+            letterHolder[e] = correctLetter;
+            wordGuess = letterHolder.join(" ");
+            wordHolder.innerHTML = wordGuess;
+            }
+
+            if (keyboard === true && keyTyped === correctLetter) {
+            document.getElementById(keyTyped).style.backgroundColor="green";
             var position = e;
             console.log(position);
             letterHolder[e] = correctLetter;
@@ -154,9 +181,17 @@ function checkAnswer(event) {
             }
         wordGuessArray = letterHolder;
         console.log(wordGuessArray);
-    }
-        if ((titleArray.includes(letterClicked) === false) || (titleArray.includes(letterTyped) === false)) {
-        console.log(titleArray);
+        }
+
+        if (click === true && titleArray.includes(letterClicked) === false){
+        console.log(letterClicked);
+        document.getElementById(letterClicked).style.backgroundColor="red";
+        counter = counter - 3;
+        console.log(counter);
+        }
+        if (keyboard === true && titleArray.includes(keyTyped) === false) {
+        console.log(keyTyped);
+        document.getElementById(keyTyped).style.backgroundColor="red";
         counter = counter - 3;
         console.log(counter);
         }
@@ -166,7 +201,7 @@ function checkAnswer(event) {
 //convert wordGuess string into array for comparison with letterHolder
 //else move to the next level - change image and re-initialize
 var handleNext = function (event) {
-    if ((letterHolder === wordGuessArray) && (letterHolder.includes("_") == false)){
+    if (letterHolder === wordGuessArray && letterHolder.includes("_") == false) {
         level += 1;
         console.log(level);
         img.src = movieLvl[level].img;
@@ -174,7 +209,8 @@ var handleNext = function (event) {
         initialize();
     }
     else {
-            alert(`Please make a guess!`); //can use modal instead of alert
+        // alert(`Please make a guess!`); //can use modal instead of alert
+
     }
 };
 
