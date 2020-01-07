@@ -214,7 +214,8 @@ var handleNext = function (event) {
         initialize();
     }
     else {
-        // alert(`Please make a guess!`); //can use modal instead of alert
+        //can use modal instead of alert
+        // alert(`Please make a guess!`);
 
     }
 };
